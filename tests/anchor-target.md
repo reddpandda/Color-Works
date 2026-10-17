@@ -1,5 +1,11 @@
 # Long target
 
+- <a href="#t-plain">go plain</a>
+- <a href="#t-dbl">go dbl (plain fragment to t-dbl)</a>
+- <a href="#t-dbl#gh-dark-mode-only">go double (t-dbl plus suffix)</a>
+- <a href="#t-id#gh-dark-mode-only">go suffix-in-id</a>
+- <a href="#top-of-page-link">go nothing</a>
+
 Filler 0.
 
 Filler 1.
