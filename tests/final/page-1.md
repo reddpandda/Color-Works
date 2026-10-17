@@ -5,13 +5,11 @@
 <td colspan="2" align="center"><a id="fill-base#gh-light-mode-only"></a><a id="fill-base#gh-dark-mode-only"></a><a href="glossary.md#g-fill-base#gh-light-mode-only"><img src="../../assets/arrow-up.svg" width="32" alt="back to glossary"></a><a href="glossary.md#g-fill-base#gh-dark-mode-only"><img src="../../assets/arrow-up-white.svg" width="32" alt="back to glossary"></a></td>
 </tr>
 <tr>
-<td>
+<td width="240">
 
 ```
 fill-base
 ```
-
-<img src="../../assets/spacer.svg" width="230" height="1" alt="">
 
 </td>
 <td>
@@ -24,13 +22,11 @@ fill-base
 <td colspan="2" align="center"><a id="fill-raised-hover#gh-light-mode-only"></a><a id="fill-raised-hover#gh-dark-mode-only"></a><a href="glossary.md#g-fill-raised-hover#gh-light-mode-only"><img src="../../assets/arrow-up.svg" width="32" alt="back to glossary"></a><a href="glossary.md#g-fill-raised-hover#gh-dark-mode-only"><img src="../../assets/arrow-up-white.svg" width="32" alt="back to glossary"></a></td>
 </tr>
 <tr>
-<td>
+<td width="240">
 
 ```
 fill-raised-hover
 ```
-
-<img src="../../assets/spacer.svg" width="230" height="1" alt="">
 
 </td>
 <td>

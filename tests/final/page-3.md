@@ -5,13 +5,11 @@
 <td colspan="2" align="center"><a id="ring-focus#gh-light-mode-only"></a><a id="ring-focus#gh-dark-mode-only"></a><a href="glossary.md#g-ring-focus#gh-light-mode-only"><img src="../../assets/arrow-up.svg" width="32" alt="back to glossary"></a><a href="glossary.md#g-ring-focus#gh-dark-mode-only"><img src="../../assets/arrow-up-white.svg" width="32" alt="back to glossary"></a></td>
 </tr>
 <tr>
-<td>
+<td width="240">
 
 ```
 ring-focus
 ```
-
-<img src="../../assets/spacer.svg" width="230" height="1" alt="">
 
 </td>
 <td>

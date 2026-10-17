@@ -5,13 +5,11 @@
 <td colspan="2" align="center"><a id="text-base#gh-light-mode-only"></a><a id="text-base#gh-dark-mode-only"></a><a href="glossary.md#g-text-base#gh-light-mode-only"><img src="../../assets/arrow-up.svg" width="32" alt="back to glossary"></a><a href="glossary.md#g-text-base#gh-dark-mode-only"><img src="../../assets/arrow-up-white.svg" width="32" alt="back to glossary"></a></td>
 </tr>
 <tr>
-<td>
+<td width="240">
 
 ```
 text-base
 ```
-
-<img src="../../assets/spacer.svg" width="230" height="1" alt="">
 
 </td>
 <td>
@@ -24,13 +22,11 @@ text-base
 <td colspan="2" align="center"><a id="text-muted#gh-light-mode-only"></a><a id="text-muted#gh-dark-mode-only"></a><a href="glossary.md#g-text-muted#gh-light-mode-only"><img src="../../assets/arrow-up.svg" width="32" alt="back to glossary"></a><a href="glossary.md#g-text-muted#gh-dark-mode-only"><img src="../../assets/arrow-up-white.svg" width="32" alt="back to glossary"></a></td>
 </tr>
 <tr>
-<td>
+<td width="240">
 
 ```
 text-muted
 ```
-
-<img src="../../assets/spacer.svg" width="230" height="1" alt="">
 
 </td>
 <td>
