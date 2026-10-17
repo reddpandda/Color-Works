@@ -1,41 +1,43 @@
-# Style hide test
+# Style hide test 2
 
-Row 0 control: no style.
+Row 1 noscript:
 
-Row 1 bare style (control):
+<noscript><style>.n1{color:red}</style></noscript>
 
-<style>.m1{color:red}</style>
+Row 2 template:
 
-Row 2 span hidden:
+<template><style>.n2{color:red}</style></template>
 
-<span hidden><style>.m2{color:red}</style></span>
+Row 3 script wrapper:
 
-Row 3 span with id and hidden:
+<script><style>.n3{color:red}</style></script>
 
-<span id="s3" hidden><style>.m3{color:red}</style></span>
+Row 4 iframe:
 
-Row 4 span hidden="hidden":
+<iframe><style>.n4{color:red}</style></iframe>
 
-<span hidden="hidden"><style>.m4{color:red}</style></span>
+Row 5 svg:
 
-Row 5 span hidden="true":
+<svg><style>.n5{color:red}</style></svg>
 
-<span hidden="true"><style>.m5{color:red}</style></span>
+Row 6 title:
 
-Row 6 div hidden:
+<title><style>.n6{color:red}</style></title>
 
-<div hidden><style>.m6{color:red}</style></div>
+Row 7 textarea:
 
-Row 7 span inline style display none:
+<textarea><style>.n7{color:red}</style></textarea>
 
-<span style="display:none"><style>.m7{color:red}</style></span>
+Row 8 comment containing style (control):
 
-Row 8 span aria-hidden:
+<!-- <style>.n8{color:red}</style> -->
 
-<span aria-hidden="true"><style>.m8{color:red}</style></span>
+Row 9 style with attribute media print:
 
-Row 9 details closed:
+<style media="print">.n9{color:red}</style>
 
-<details><summary>d</summary><style>.m9{color:red}</style></details>
+Row 10 span class and plain text after:
+
+<span class="x">visible text</span>
 
 End.
