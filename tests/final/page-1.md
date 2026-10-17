@@ -11,6 +11,8 @@
 fill-base
 ```
 
+<img src="../../assets/spacer.svg" width="230" height="1" alt="">
+
 </td>
 <td>
 
@@ -27,6 +29,8 @@ fill-base
 ```
 fill-raised-hover
 ```
+
+<img src="../../assets/spacer.svg" width="230" height="1" alt="">
 
 </td>
 <td>

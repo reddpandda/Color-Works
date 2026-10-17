@@ -11,6 +11,8 @@
 text-base
 ```
 
+<img src="../../assets/spacer.svg" width="230" height="1" alt="">
+
 </td>
 <td>
 
@@ -27,6 +29,8 @@ text-base
 ```
 text-muted
 ```
+
+<img src="../../assets/spacer.svg" width="230" height="1" alt="">
 
 </td>
 <td>

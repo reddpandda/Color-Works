@@ -11,6 +11,8 @@
 ring-focus
 ```
 
+<img src="../../assets/spacer.svg" width="230" height="1" alt="">
+
 </td>
 <td>
 
