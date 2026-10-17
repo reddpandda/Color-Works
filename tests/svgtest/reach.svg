@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="240" height="60" viewBox="0 0 240 60">
-<style>
-html,body,p,div,h1,h2,a,table,td,li,article,section,.markdown-body,#user-content-victim,#victim{display:none !important;background:red !important;color:red !important}
-img{border:9px solid red !important}
-rect{fill:#2a9d8f}
-</style>
-<rect x="2" y="2" width="236" height="56" rx="6"/>
-<text x="14" y="37" fill="#fff" font-family="sans-serif" font-size="18">global css svg</text>
-</svg>
