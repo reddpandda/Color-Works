@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+<style>
+g.c{display:none}
+g.c:target{display:inline}
+#c-b:target{transform:translate(-100px,0)}
+#c-c:target{transform:translate(-200px,0)}
+#c-d:target{transform:translate(-300px,0)}
+</style>
+<g id="c-a" class="c"><rect x="0" width="100" height="100" fill="#b3261e"/><text x="50" y="72" font-family="sans-serif" font-size="64" font-weight="700" text-anchor="middle" fill="#fff">A</text></g>
+<g id="c-b" class="c"><rect x="100" width="100" height="100" fill="#2a9d8f"/><text x="150" y="72" font-family="sans-serif" font-size="64" font-weight="700" text-anchor="middle" fill="#fff">B</text></g>
+<g id="c-c" class="c"><rect x="200" width="100" height="100" fill="#1b6ca8"/><text x="250" y="72" font-family="sans-serif" font-size="64" font-weight="700" text-anchor="middle" fill="#fff">C</text></g>
+<g id="c-d" class="c"><rect x="300" width="100" height="100" fill="#8a5a00"/><text x="350" y="72" font-family="sans-serif" font-size="64" font-weight="700" text-anchor="middle" fill="#fff">D</text></g>
+</svg>
