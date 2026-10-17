@@ -1,5 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="320" height="140" viewBox="0 0 320 140">
-<foreignObject x="0" y="0" width="320" height="140">
-<div xmlns="http://www.w3.org/1999/xhtml" style="box-sizing:border-box;width:320px;height:140px;display:flex;align-items:center;justify-content:center;padding:12px;border:3px double #b3261e;border-radius:12px;background:#fffaf0;color:#222;font:16px/1.4 Georgia,serif;text-align:center"><p style="margin:0">foreignObject box: wrapped text <b>bold</b> <i>italic</i> <span style="color:#1b6ca8">blue</span> with flex centering and padding.</p></div>
-</foreignObject>
-</svg>
