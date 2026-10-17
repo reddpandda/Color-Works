@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="60" viewBox="0 0 240 60">
+<style>
+.bg{fill:#fff;stroke:#000}
+.t{fill:#000;font:700 20px sans-serif}
+@media (prefers-color-scheme: dark){.bg{fill:#111;stroke:#fff}.t{fill:#fff}}
+</style>
+<rect class="bg" x="2" y="2" width="236" height="56" rx="6"/>
+<text class="t" x="14" y="37">light/dark svg</text>
+</svg>
