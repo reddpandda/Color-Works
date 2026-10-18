@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Centered SVG Number Generator (0, 00, 01-09, 1-99)</title>
+<!-- JSZip builds the download-all ZIP in the browser. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<style>
+  body { font-family: system-ui, sans-serif; background: #f4f4f4; margin: 0; text-align: center; }
+  .header { background: #222; color: #fff; padding: 16px; position: sticky; top: 0; z-index: 10; box-shadow: 0 2px 10px rgba(0,0,0,.3); }
+  .header h2 { margin: 0 0 10px; font-size: 18px; }
+  .big-btn { background: #28a745; color: #fff; border: 0; padding: 11px 22px; font-size: 15px; font-weight: 700; border-radius: 6px; cursor: pointer; }
+  .big-btn:hover { background: #218838; } .big-btn:disabled { background: #6c757d; cursor: not-allowed; }
+  #status { margin-top: 8px; font-size: 13px; font-weight: 700; color: #ffc107; min-height: 1em; }
+  .controls { padding: 12px; background: #e9ecef; border-bottom: 1px solid #ddd; display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; align-items: center; font-size: 13px; }
+  .controls label { display: inline-flex; gap: 6px; align-items: center; }
+  select, input[type=number] { padding: 5px 8px; font-size: 13px; border-radius: 4px; border: 1px solid #bbb; }
+  input[type=number] { width: 70px; }
+  .grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 12px; max-width: 1300px; margin: 18px auto; padding: 0 10px; }
+  @media (max-width: 900px) { .grid { grid-template-columns: repeat(4, 1fr); } }
+  .card { background: #e8e8e8; padding: 12px; border-radius: 8px; min-width: 0; box-sizing: border-box; box-shadow: 0 1px 4px rgba(0,0,0,.12); }
+  .card.dark-bg { background: #2a2a2a; color: #fff; }
+  h3 { margin: 4px 0 8px; font-size: 12px; font-weight: 600; line-height: 1.25; height: 2.5em; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  svg { display: block; margin: 0 auto 8px; }
+  button.single-btn { background: #007bff; color: #fff; border: 0; padding: 5px 10px; font-size: 12px; border-radius: 4px; cursor: pointer; width: 100%; }
+  button.single-btn:hover { background: #0056b3; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h2>SVG Number Generator: 0, 00, 01 to 09 and 1 to 99, centered by measured glyph ink</h2>
+  <button class="big-btn" id="downloadAllBtn" onclick="downloadAllZip()">Download all SVGs in folders (ZIP)</button>
+  <div id="status"></div>
+</div>
+
+<div class="controls">
+  <label>Style
+    <select id="filterSelect" onchange="renderGallery()"></select>
+  </label>
+  <label>Fit radius <input type="number" id="fitRadius" value="31" min="10" max="39" step="0.5" onchange="rebuild()"> (px of 100)</label>
+  <label>1-digit size, times 2-digit size <input type="number" id="singleRatio" value="1.3" min="1" max="2" step="0.05" onchange="rebuild()"></label>
+  <label><input type="checkbox" id="guides" onchange="renderGallery()"> Show center guides (not exported)</label>
+</div>
+
+<div class="grid" id="container"></div>
+
+<script>
+/* Digit outlines come from JetBrains Mono Bold (SIL Open Font License 1.1,
+   https://github.com/JetBrains/JetBrainsMono). They are real glyph paths, so the
+   SVGs need no font on the viewer's machine. Coordinates are font units (1000 per em),
+   y-down, baseline at y = 0. bbox = [xmin, ymin, xmax, ymax] of the exact outline. */
+const GLYPHS = {"0":{"d":"M300 10Q229 10 177 -17Q125 -44 96.5 -93Q68 -142 68 -208V-522Q68 -588 96.5 -637Q125 -686 177 -713Q229 -740 300 -740Q372 -740 423.5 -713Q475 -686 503.5 -637Q532 -588 532 -522V-208Q532 -142 503.5 -93Q475 -44 423 -17Q371 10 300 10ZM300 -98Q352 -98 383 -128Q414 -158 414 -208V-522Q414 -572 383 -602Q352 -632 300 -632Q248 -632 217 -602Q186 -572 186 -522V-208Q186 -158 217 -128Q248 -98 300 -98ZM300 -300Q271 -300 252.5 -319Q234 -338 234 -368Q234 -398 252 -416Q270 -434 300 -434Q330 -434 348 -416Q366 -398 366 -368Q366 -338 348 -319Q330 -300 300 -300Z","adv":600,"bbox":[68,-740,532,10]},"1":{"d":"M84 0V-110H274V-619L83 -477V-609L251 -730H399V-110H552V0Z","adv":600,"bbox":[83,-730,552,0]},"2":{"d":"M79 0V-121L307 -350Q355 -399 378 -438.5Q401 -478 401 -520Q401 -571 373 -599.5Q345 -628 297 -628Q244 -628 214 -597.5Q184 -567 184 -513H59Q60 -583 89.5 -633.5Q119 -684 173 -712Q227 -740 299 -740Q368 -740 419 -714Q470 -688 498 -641Q526 -594 526 -529Q526 -462 491.5 -398.5Q457 -335 381 -262L229 -113H535V0Z","adv":600,"bbox":[59,-740,535,0]},"3":{"d":"M293 10Q222 10 169.5 -16Q117 -42 88 -89Q59 -136 59 -200H185Q185 -151 213.5 -123.5Q242 -96 294 -96Q346 -96 374 -124Q402 -152 402 -200V-257Q402 -306 374 -333.5Q346 -361 294 -361H212V-474L373 -623H92V-730H500V-617L335 -466Q415 -457 465 -411Q528 -354 528 -257V-200Q528 -136 499 -89Q470 -42 417 -16Q364 10 293 10Z","adv":600,"bbox":[59,-730,528,10]},"4":{"d":"M390 0V-145H65V-326L346 -730H486L185 -293V-255H390V-420H515V0Z","adv":600,"bbox":[65,-730,515,0]},"5":{"d":"M299 10Q198 10 137 -40.5Q76 -91 70 -178H195Q199 -140 225.5 -119.5Q252 -99 299 -99Q351 -99 378 -126.5Q405 -154 405 -203V-274Q405 -324 378 -350.5Q351 -377 299 -377Q267 -377 244 -364Q221 -351 209 -328H87L92 -730H503V-617H210L208 -405H210Q218 -434 244 -453Q280 -479 342 -479Q431 -480 480.5 -425.5Q530 -371 530 -274V-203Q530 -104 468.5 -47Q407 10 299 10Z","adv":600,"bbox":[70,-730,530,10]},"6":{"d":"M300 10Q227 10 171.5 -20.5Q116 -51 85.5 -106.5Q55 -162 55 -235Q55 -287 72.5 -344Q90 -401 121 -451L293 -730H432L216 -390L222 -386Q242 -417 276 -433Q310 -449 352 -449Q411 -449 454 -421Q497 -393 521 -343Q545 -293 545 -226Q545 -155 514.5 -102Q484 -49 429.5 -19.5Q375 10 300 10ZM300 -96Q355 -96 389 -131.5Q423 -167 423 -224Q423 -283 389 -318.5Q355 -354 300 -354Q245 -354 211 -318.5Q177 -283 177 -224Q177 -167 211 -131.5Q245 -96 300 -96Z","adv":600,"bbox":[55,-730,545,10]},"7":{"d":"M155 0 419 -614H185V-508H60V-730H544V-612L289 0Z","adv":600,"bbox":[60,-730,544,0]},"8":{"d":"M300 10Q228 10 175 -14.5Q122 -39 93 -84Q64 -129 64 -189Q64 -255 101 -302Q135 -345 198 -376Q142 -405 112 -444Q76 -488 76 -550Q76 -606 103 -649Q130 -692 180.5 -716Q231 -740 300 -740Q369 -740 418.5 -716Q468 -692 495.5 -649Q523 -606 523 -550Q523 -487 488 -443Q458 -405 403 -376Q470 -343 501 -301Q536 -253 536 -189Q536 -97 472.5 -43.5Q409 10 300 10ZM300 -97Q352 -97 382.5 -124.5Q413 -152 413 -197Q413 -232 392 -263.5Q371 -295 334 -312L300 -328L265 -311Q229 -295 208 -264Q187 -233 187 -198Q187 -153 217.5 -125Q248 -97 300 -97ZM300 -423 323 -433Q359 -450 379.5 -479Q400 -508 400 -544Q400 -585 373 -609.5Q346 -634 300 -634Q254 -634 226.5 -609Q199 -584 199 -543Q199 -508 220 -479Q241 -450 276 -434Z","adv":600,"bbox":[64,-740.0,536,10]},"9":{"d":"M168 0 384 -340 378 -344Q358 -313 324 -297Q290 -281 248 -281Q190 -281 146.5 -309Q103 -337 79 -387Q55 -437 55 -504Q55 -576 85.5 -628.5Q116 -681 171 -710.5Q226 -740 299 -740Q374 -740 429 -709.5Q484 -679 514.5 -624Q545 -569 545 -495Q545 -444 528 -386.5Q511 -329 479 -279L307 0ZM300 -376Q355 -376 389 -411.5Q423 -447 423 -506Q423 -563 389 -598.5Q355 -634 300 -634Q245 -634 211 -598.5Q177 -563 177 -506Q177 -447 211 -411.5Q245 -376 300 -376Z","adv":600,"bbox":[55,-740,545,0]}};
+
+const STYLES = [
+  { id: 'circle_outline_black', folder: 'black-circle-outline', shape: 'circle', filled: false, color: '#000', dark: false },
+  { id: 'square_outline_black', folder: 'black-box-outline', shape: 'square', filled: false, color: '#000', dark: false },
+  { id: 'circle_filled_black',  folder: 'black-circle-filled',  shape: 'circle', filled: true,  color: '#000', dark: false },
+  { id: 'square_filled_black',  folder: 'black-box-filled',  shape: 'square', filled: true,  color: '#000', dark: false },
+  { id: 'circle_outline_white', folder: 'white-circle-outline', shape: 'circle', filled: false, color: '#fff', dark: true  },
+  { id: 'square_outline_white', folder: 'white-box-outline', shape: 'square', filled: false, color: '#fff', dark: true  },
+  { id: 'circle_filled_white',  folder: 'white-circle-filled',  shape: 'circle', filled: true,  color: '#fff', dark: true  },
+  { id: 'square_filled_white',  folder: 'white-box-filled',  shape: 'square', filled: true,  color: '#fff', dark: true  }
+];
+
+const NUMBERS = ['0', '00'];
+for (let i = 1; i <= 9; i++) NUMBERS.push('0' + i);   /* zero-padded 01 to 09, same scale as 10 to 99 */
+for (let i = 1; i <= 99; i++) NUMBERS.push(String(i));
+
+/* Vertical band shared by every digit: baseline-relative top and bottom of the tallest
+   digits. Centering this band (not each number's own ink) keeps one baseline across the set. */
+const BAND_TOP = Math.min(...Object.values(GLYPHS).map(g => g.bbox[1]));
+const BAND_BOT = Math.max(...Object.values(GLYPHS).map(g => g.bbox[3]));
+const BAND_MID = (BAND_TOP + BAND_BOT) / 2;
+const BAND_H = BAND_BOT - BAND_TOP;
+const ADV = GLYPHS['0'].adv;                       /* monospace advance, 600 */
+
+/* Horizontal ink extent of a number, in font units, from its first glyph origin. */
+function inkX(num) {
+  let xmin = Infinity, xmax = -Infinity;
+  [...num].forEach((c, i) => {
+    xmin = Math.min(xmin, i * ADV + GLYPHS[c].bbox[0]);
+    xmax = Math.max(xmax, i * ADV + GLYPHS[c].bbox[2]);
+  });
+  return [xmin, xmax];
+}
+
+/* One scale per digit count, so every 1-digit number shares a size and every 2-digit
+   number shares a size. The widest number of each group sets how big the group can be:
+   its ink box's corner must stay inside the fit radius. */
+function scales(fit, ratio) {
+  const s = {};
+  [1, 2].forEach(n => {
+    let worst = 0;
+    NUMBERS.filter(x => x.length === n).forEach(x => {
+      const [a, b] = inkX(x), w = b - a;
+      worst = Math.max(worst, Math.hypot(w / 2, BAND_H / 2));
+    });
+    s[n] = fit / worst;
+  });
+  s[1] = Math.min(s[1], s[2] * ratio);
+  return s;
+}
+
+const r2 = v => Math.round(v * 100) / 100;
+
+function shellMarkup(st) {
+  const c = st.color;
+  if (st.shape === 'circle')
+    return st.filled ? `<circle cx="50" cy="50" r="45" fill="${c}"/>`
+                     : `<circle cx="50" cy="50" r="42" fill="none" stroke="${c}" stroke-width="6"/>`;
+  return st.filled ? `<rect x="5" y="5" width="90" height="90" rx="10" fill="${c}"/>`
+                   : `<rect x="8" y="8" width="84" height="84" rx="7" fill="none" stroke="${c}" stroke-width="6"/>`;
+}
+
+function glyphMarkup(num, st, s) {
+  const [a, b] = inkX(num);
+  const tx = 50 - s * (a + b) / 2;                 /* ink box centered horizontally */
+  const ty = 50 - s * BAND_MID;                    /* shared band centered vertically */
+  const fill = st.filled ? (st.color === '#000' ? '#fff' : '#000') : st.color;
+  const paths = [...num].map((c, i) =>
+    `<path${i ? ` transform="translate(${i * ADV} 0)"` : ''} d="${GLYPHS[c].d}"/>`).join('');
+  return `<g fill="${fill}" transform="translate(${r2(tx)} ${r2(ty)}) scale(${Math.round(s * 1e5) / 1e5})">${paths}</g>`;
+}
+
+function makeSvg(num, st, sc, guides) {
+  const g = guides ? '<path d="M50 0V100M0 50H100" stroke="#e22" stroke-width=".4" fill="none"/>' : '';
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 100 100">` +
+         shellMarkup(st) + glyphMarkup(num, st, sc[num.length]) + g + `</svg>`;
+}
+
+let registry = [];
+function rebuild() {
+  const fit = parseFloat(document.getElementById('fitRadius').value);
+  const ratio = parseFloat(document.getElementById('singleRatio').value);
+  const sc = scales(fit, ratio);
+  registry = [];
+  NUMBERS.forEach(num => STYLES.forEach(st => registry.push({
+    num, st, filename: `number_${num}.svg`, svg: makeSvg(num, st, sc, false), svgGuides: makeSvg(num, st, sc, true)
+  })));
+  renderGallery();
+}
+
+function renderGallery() {
+  const f = document.getElementById('filterSelect').value;
+  const guides = document.getElementById('guides').checked;
+  const box = document.getElementById('container');
+  box.innerHTML = '';
+  registry.filter(it => f === 'all' || it.st.id === f).forEach(it => {
+    const card = document.createElement('div');
+    card.className = 'card' + (it.st.dark ? ' dark-bg' : '');
+    card.innerHTML = `<h3>${it.num} (${it.st.id.replace(/_/g, ' ')})</h3>` + (guides ? it.svgGuides : it.svg);
+    const btn = document.createElement('button');
+    btn.className = 'single-btn'; btn.textContent = 'Download';
+    btn.onclick = () => saveBlob(new Blob([it.svg], { type: 'image/svg+xml' }), `number_${it.num}_${it.st.id}.svg`);
+    card.appendChild(btn);
+    box.appendChild(card);
+  });
+}
+
+function saveBlob(blob, name) {
+  const url = URL.createObjectURL(blob), a = document.createElement('a');
+  a.href = url; a.download = name; document.body.appendChild(a); a.click();
+  document.body.removeChild(a); URL.revokeObjectURL(url);
+}
+
+async function downloadAllZip() {
+  const btn = document.getElementById('downloadAllBtn'), status = document.getElementById('status');
+  btn.disabled = true; status.textContent = 'Building ZIP...';
+  const zip = new JSZip();
+  registry.forEach(it => zip.folder(it.st.folder).file(it.filename, it.svg));
+  try {
+    const blob = await zip.generateAsync({ type: 'blob' }, m => status.textContent = `Compressing ${m.percent.toFixed(0)}%`);
+    saveBlob(blob, 'svg_numbers_0_99_all_styles.zip');
+    status.textContent = 'Download complete.'; setTimeout(() => status.textContent = '', 4000);
+  } catch (e) { status.textContent = 'Error building ZIP.'; console.error(e); }
+  finally { btn.disabled = false; }
+}
+
+(function init() {
+  const sel = document.getElementById('filterSelect');
+  sel.innerHTML = `<option value="all">All styles (${NUMBERS.length * STYLES.length} files)</option>` +
+    STYLES.map(s => `<option value="${s.id}">${s.id.replace(/_/g, ' ')}</option>`).join('');
+  rebuild();
+})();
+</script>
+</body>
+</html>

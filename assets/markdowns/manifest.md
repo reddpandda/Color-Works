@@ -1,11 +1,12 @@
 # Asset manifest
 
-Every file in `assets/markdowns/` is listed here.
+Every folder in `assets/markdowns/` is listed here.
 
-| Folder | Contents |
-| --- | --- |
-| numbers/white-box | white boxed numbers (pending) |
-| numbers/black-box | black boxed numbers (pending) |
-| numbers/white-circle | white circled numbers (pending) |
-| numbers/black-circle | black circled numbers (pending) |
-| extras | spacer helpers (pending) |
+| Folder | Contents | Count |
+| --- | --- | --- |
+| numbers/black-box-filled | `number_01.svg` to `number_99.svg` | 99 |
+| numbers/white-box-filled | `number_01.svg` to `number_99.svg` | 99 |
+| numbers/black-circle-filled | `number_01.svg` to `number_99.svg` | 99 |
+| numbers/white-circle-filled | `number_01.svg` to `number_99.svg` | 99 |
+| numbers/ | `number-generator.html`, the tool that builds the number icons | 1 |
+| extras | spacer helpers (pending) | 0 |
