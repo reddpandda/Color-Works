@@ -23,8 +23,8 @@ The glossary (page 02) holds the authoritative definitions. Until it is written,
 - **Kind**: the first word of an id. It says what is colored: `fill`, `text`, `icon`, `line`, `ring` or `shadow`.
 - **Type**: the word after the kind. It says what the role is for. An on-form has no type slot, because the target takes its place.
 - **Form**: plain or on-form.
-- **Emphasis**: an optional strength word (`subtle`, `strong`) that makes a different role from the same type. Leaving it out means default strength.
-- **State**: a temporary condition of use: `hover`, `active`, `selected`, `disabled` or `visited`. A state never makes a new role.
+- **Emphasis**: an optional strength word (`subtle`, `strong`) that makes a different role from the same kind and type. Leaving it out means normal emphasis.
+- **State**: a condition of use: `hover`, `active`, `selected`, `disabled` or `visited`. An id with a state is its own role.
 - **Target**: the fill whose id an on-form id contains.
 
 Emphasis and state can appear in one id. Emphasis comes first, then state, as in `text-base-subtle-disabled`.
